@@ -4,6 +4,11 @@ import '../dummy_data.dart';
 class MealDetailScreen extends StatelessWidget {
   static const routeName = '/meal-detail';
 
+  final Function favoriteMealHandler;
+  final Function isFavorite;
+
+  MealDetailScreen(this.favoriteMealHandler, this.isFavorite);
+
   Widget buildSectionTitle(BuildContext ctx, String text) {
     return Container(
       margin: EdgeInsets.symmetric(vertical: 10),
@@ -73,6 +78,10 @@ class MealDetailScreen extends StatelessWidget {
                 itemCount: selectedMeal.steps.length))
           ],
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(isFavorite(mealId) ? Icons.star : Icons.star_border),
+        onPressed: () => favoriteMealHandler(mealId),
       ),
     );
   }
